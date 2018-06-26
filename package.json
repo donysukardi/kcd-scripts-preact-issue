@@ -1,0 +1,30 @@
+{
+  "name": "example-lib",
+  "private": "true",
+  "version": "1.0.0",
+  "main": "dist/example-lib.cjs.js",
+  "module": "dist/example-lib.esm.js",
+  "jsnext:main": "dist/example-lib.esm.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "kcd-scripts build --bundle --p-react --no-clean",
+    "build:original": "patch-package --reverse && yarn build",
+    "build:patch": "patch-package && yarn build",
+    "start-example": "yarn --cwd=example start",
+    "link-package": "yarn link && yarn --cwd=example link example-lib",
+    "postinstall": "yarn link-package && yarn --cwd=example install",
+    "example:patch": "yarn build:patch && yarn start-example",
+    "example:original": "yarn build:original && yarn start-example"
+  },
+  "files": [
+    "dist",
+    "preact"
+  ],
+  "devDependencies": {
+    "kcd-scripts": "^0.39.1",
+    "patch-package": "^5.1.1",
+    "preact": "^8.2.9",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  }
+}
